@@ -20,4 +20,4 @@ git clone https://github.com/pymumu/openwrt-smartdns.git /package/lean/smartdns
 git clone https://github.com/pymumu/luci-app-smartdns.git /package/lean/luci-app-smartdns
 #git clone https://github.com/kuoruan/openwrt-frp.git /package/frp-pi
 #git clone https://github.com/kuoruan/luci-app-frpc.git /package/luci-app-frpc-pi
-git clone https://github.com/esirplayground/luci-app-poweroff.git package/lean/luci-app-poweroff
+#git clone https://github.com/esirplayground/luci-app-poweroff.git package/lean/luci-app-poweroff
