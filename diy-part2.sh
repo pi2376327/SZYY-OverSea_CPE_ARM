@@ -12,7 +12,7 @@
 
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.150.1/g' package/base-files/files/bin/config_generate
-sed -i 's/hostname='OpenWrt'/hostname='jywx'/g' package/base-files/files/bin/config_generate
+sed -i 's/OpenWrt/jywx/g' package/base-files/files/bin/config_generate
 cat >package/base-files/files/etc/banner<<EOF
   ____      _     ___   ____        ____  __
  | __ )    | |   | \ \ / /\ \      / /\ \/ /
