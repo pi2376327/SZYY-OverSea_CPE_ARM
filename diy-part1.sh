@@ -17,5 +17,5 @@
 echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
 echo 'src-git infinityfreedom https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom' >>feeds.conf.default
-echo 'src-git luciappsmartdns https://github.com/pi2376327/luci-app-smartdns.git' >>feeds.conf.default
-echo 'src-git netmaker http://github.com/sbilly/netmaker-openwrt.git' >>feeds.conf.default
+echo 'src-git luciappsmartdns https://github.com/pi2376327/luci-app-smartdns' >>feeds.conf.default
+echo 'src-git netmaker http://github.com/sbilly/netmaker-openwrt' >>feeds.conf.default
