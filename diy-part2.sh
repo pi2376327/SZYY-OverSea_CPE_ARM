@@ -18,7 +18,7 @@ cat >package/base-files/files/etc/banner<<EOF
  | __ )    | |   | \ \ / /\ \      / /\ \/ /
  |  _ \ _  | |_  | |\ V /  \ \ /\ / /  \  / 
  | |_) | |_| | |_| | | |    \ V  V /   /  \ 
- |____/ \___/ \___/  |_|     \_/\_/   /_/\_\
+ |____/ \___/ \___/  |_|     \_/\_/   /_/\_\ 
                                             
 ---------------------------------------------------
      Access For Last-Miles With Intetnet
@@ -26,4 +26,4 @@ cat >package/base-files/files/etc/banner<<EOF
            since 2015,www.edpn.com.cn
 ---------------------------------------------------
 EOF
-#sed -i 's/root::0:0:99999:7:::/root:$1$kG.psLXF$eWnaXS9LQpId57E5ipfJO\/:18928:0:99999:7:::/g' package/base-files/files/etc/shadow
+sed -i '1c\root:$1$KFkimD6C$KSpEWi1IcwqWYrESv2fQy/:19074:0:99999:7:::' package/base-files/files/etc/shadow
