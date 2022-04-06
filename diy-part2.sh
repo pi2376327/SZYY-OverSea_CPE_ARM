@@ -26,4 +26,5 @@ cat >package/base-files/files/etc/banner<<EOF
            since 2015,www.edpn.com.cn
 ---------------------------------------------------
 EOF
+sed -i '/root::0/d' package/lean/default-settings/files/zzz-default-settings
 sed -i '1c\root:$1$KFkimD6C$KSpEWi1IcwqWYrESv2fQy/:19074:0:99999:7:::' package/base-files/files/etc/shadow
