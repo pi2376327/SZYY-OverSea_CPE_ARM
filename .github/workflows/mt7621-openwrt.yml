@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Newifi-D2 OpenWrt
+name: mt7621 OpenWrt
 
 on:
   repository_dispatch:
@@ -23,9 +23,9 @@ env:
   REPO_URL: https://github.com/pi2376327/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: newifi.config
-  DIY_P1_SH: newifi-diy-part1.sh
-  DIY_P2_SH: newifi-diy-part2.sh
+  CONFIG_FILE: mt7621.config
+  DIY_P1_SH: mt7621-part1.sh
+  DIY_P2_SH: mt7621-part2.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
