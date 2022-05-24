@@ -16,6 +16,3 @@
 # Add a feed source
 echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
-#echo 'src-git infinityfreedom https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom' >>feeds.conf.default
-#echo 'src-git luciappsmartdns https://github.com/pymumu/luci-app-smartdns' >>feeds.conf.default
-echo 'src-git smartdns https://github.com/pi2376327/luci-app-smartdns' >>feeds.conf.default
