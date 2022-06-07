@@ -42,3 +42,6 @@ cat >>feeds/luci/modules/luci-base/po/zh-cn/base.po<<EOF
 msgid "Compiler author"
 msgstr "编译者"
 EOF
+
+#更改默认主题
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Makefile
