@@ -35,7 +35,7 @@ EOF
 sed -i '/root::0/d' package/lean/default-settings/files/zzz-default-settings
 
 #替换版本和名字
-sed -i 's/R22.5.5/R2022.6.7/g' package/lean/default-settings/files/zzz-default-settings
+sed -i 's/R22.3.13/R2022.6.7/g' package/lean/default-settings/files/zzz-default-settings
 sed -i 's/OpenWrt/JYWX-CPE/g' package/lean/default-settings/files/zzz-default-settings
 sed -i '1c\root:$1$KFkimD6C$KSpEWi1IcwqWYrESv2fQy/:19074:0:99999:7:::' package/base-files/files/etc/shadow
 
