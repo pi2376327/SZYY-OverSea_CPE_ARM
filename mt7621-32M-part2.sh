@@ -39,7 +39,7 @@ sed -i 's#$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0#$1$KFkimD6C$KSpEWi1IcwqWYrESv2fQy
 #替换版本和名字，以及设备型号
 sed -i 's/R23.3.3/R23.3.22/g' package/lean/default-settings/files/zzz-default-settings
 sed -i 's/OpenWrt/JYWX-CPE/g' package/lean/default-settings/files/zzz-default-settings
-sed -i '$a\echo \'s#Zbtlink ZBT-WG3526#JYWX=WIFI-4G#g\' /proc/cpuinfo' package/lean/default-settings/files/zzz-default-settings
+echo "sed -i 's/Zbtlink ZBT-WG3526/JYWX=WIFI-4G/g\' /proc/cpuinfo" >>  package/lean/default-settings/files/zzz-default-settings
 
 #更改默认主题
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Makefile
