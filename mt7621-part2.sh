@@ -41,7 +41,7 @@ sed -i 's/OpenWrt/JYWX-CPE/g' package/lean/default-settings/files/zzz-default-se
 echo "sed -i 's/Zbtlink ZBT-WG3526/JYWX-WIFI-4G/g' /proc/cpuinfo" >>  package/lean/default-settings/files/zzz-default-settings
 
 #更改默认主题
-sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Makefile
+#sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Makefile
 
 #更改默认wifi ssid
 sed -i 's/set wireless.default_radio${devidx}.ssid=OpenWrt/set wireless.default_radio${devidx}.ssid=vpn/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
