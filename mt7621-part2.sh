@@ -51,3 +51,6 @@ sed -i '/psk2/a\                        set wireless.default_radio${devidx}.key=
 #更改wan口默认dns
 sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option dns '\\\''172\.16\.0\.1'\\\''\' \/etc\/config\/network"   package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option peerdns '\\\''0'\\\''\' \/etc\/config\/network"   package/lean/default-settings/files/zzz-default-settings
+
+#更改frp版本
+ sed -i 's/0\.47\.0/0\.48\.0/g' package/feeds/packages/frp/Makefile
