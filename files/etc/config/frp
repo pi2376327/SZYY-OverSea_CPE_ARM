@@ -14,7 +14,7 @@ config frp 'common'
         option tcp_mux '0'
         option log_level 'debug'
         option log_max_days '2'
-        option enabled '1'
+        option enabled '0'
         option user 'client'
         option tcp_mux '1'
 
