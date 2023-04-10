@@ -53,4 +53,4 @@ sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option d
 sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option peerdns '\\\''0'\\\''\' \/etc\/config\/network"   package/lean/default-settings/files/zzz-default-settings
 
 #更改frp版本
- sed -i 's/0\.47\.0/0\.48\.0/g' package/feeds/packages/frp/Makefile
+#sed -i 's/0\.47\.0/0\.48\.0/g' package/feeds/packages/frp/Makefile
