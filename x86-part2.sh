@@ -17,19 +17,8 @@ sed -i 's/192.168.1.1/192.168.150.1/g' package/base-files/files/bin/config_gener
 sed -i 's/OpenWrt/JYWX-CPE/g' package/base-files/files/bin/config_generate
 
 #修改欢迎banner
-cat >package/base-files/files/etc/banner<<EOF
-  ____      _     ___   ____        ____  __
- | __ )    | |   | \ \ / /\ \      / /\ \/ /
- |  _ \ _  | |_  | |\ V /  \ \ /\ / /  \  / 
- | |_) | |_| | |_| | | |    \ V  V /   /  \ 
- |____/ \___/ \___/  |_|     \_/\_/   /_/\_\ 
-                                            
---------------------------------------------------------
-     Access For Last-Miles With Intetnet
-  
-           since 2015,www.edpn.com.cn
---------------------------------------------------------
-EOF
+#cat >package/base-files/files/etc/banner<<EOF
+#EOF
 
 #修改默认密码
 sed -i '1c\root:$1$KFkimD6C$KSpEWi1IcwqWYrESv2fQy/:19074:0:99999:7:::' package/base-files/files/etc/shadow
