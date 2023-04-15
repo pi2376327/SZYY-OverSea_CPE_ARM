@@ -6,7 +6,7 @@ ipset create chnroute hash:net
 ipset restore -f /etc/openvpn/chnroute-ipset
 
 #add +x for script of openvpn
-chmod +x /etc/openvpn/openvpn-up.sh
-chmod +x /etc/openvpn/openvpn-down.sh
+#chmod +x /etc/openvpn/openvpn-up.sh
+#chmod +x /etc/openvpn/openvpn-down.sh
 
 exit 0
