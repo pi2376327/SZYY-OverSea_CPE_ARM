@@ -17,19 +17,8 @@ sed -i 's/192.168.1.1/192.168.150.1/g' package/base-files/files/bin/config_gener
 sed -i 's/OpenWrt/JYWX-CPE/g' package/base-files/files/bin/config_generate
 
 #修改欢迎banner
-cat >package/base-files/files/etc/banner<<EOF
-  ____      _     ___   ____        ____  __
- | __ )    | |   | \ \ / /\ \      / /\ \/ /
- |  _ \ _  | |_  | |\ V /  \ \ /\ / /  \  / 
- | |_) | |_| | |_| | | |    \ V  V /   /  \ 
- |____/ \___/ \___/  |_|     \_/\_/   /_/\_\ 
-                                            
---------------------------------------------------------
-     Access For Last-Miles With Intetnet
-  
-           since 2015,www.edpn.com.cn
---------------------------------------------------------
-EOF
+#cat >package/base-files/files/etc/banner<<EOF
+#EOF
 
 #修改默认密码
 sed -i '1c\root:$1$KFkimD6C$KSpEWi1IcwqWYrESv2fQy/:19074:0:99999:7:::' package/base-files/files/etc/shadow
@@ -37,11 +26,10 @@ sed -i '1c\root:$1$KFkimD6C$KSpEWi1IcwqWYrESv2fQy/:19074:0:99999:7:::' package/b
 #替换版本和名字，以及设备型号
 sed -i 's/R23.3.3/R23.3.22/g' package/lean/default-settings/files/zzz-default-settings
 sed -i 's/OpenWrt/JYWX-CPE/g' package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\sed -i \'s#Zbtlink ZBT-WG3526#JYWX-WIFI-4G#g\' \/proc\/cpuinfo" >>  package/lean/default-settings/files/zzz-default-settings
+#sed -i "/exit 0/i\sed -i \'s#Zbtlink ZBT-WG3526#JYWX-WIFI-4G#g\' \/proc\/cpuinfo" >>  package/lean/default-settings/files/zzz-default-settings
 
 #更改默认主题
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Makefile
-
 
 #更改默认wifi ssid
 sed -i 's/set wireless.default_radio${devidx}.ssid=OpenWrt/set wireless.default_radio${devidx}.ssid=vpn/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
@@ -52,5 +40,10 @@ sed -i '/psk2/a\                        set wireless.default_radio${devidx}.key=
 sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option dns '\\\''172\.16\.0\.1'\\\''\' \/etc\/config\/network"   package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option peerdns '\\\''0'\\\''\' \/etc\/config\/network"   package/lean/default-settings/files/zzz-default-settings
 
-#更改frp版本
-#sed -i 's/0\.47\.0/0\.48\.0/g' package/feeds/packages/frp/Makefile
+#添加文件权限
+sed -i "/exit 0/i\chmod +x /etc/openvpn/openvpn-up.sh" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\chmod +x /etc/openvpn/openvpn-down.sh" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\chmod +x /root/update-ip-china-list.sh" package/lean/default-settings/files/zzz-default-settings
+
+#增加crontab任务
+sed -i "/exit 0/i\echo \'1 2 \* \* sun sh \/root\/update-ip-china-list\.sh\' >> \/etc\/crontab\/root" package/lean/default-settings/files/zzz-default-settings
