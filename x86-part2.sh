@@ -34,3 +34,11 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Ma
 #更改wan口默认dns
 sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option dns '\\\''172\.16\.0\.1'\\\''\' \/etc\/config\/network"   package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option peerdns '\\\''0'\\\''\' \/etc\/config\/network"   package/lean/default-settings/files/zzz-default-settings
+
+#添加文件权限
+sed -i "/exit 0/i\chmod +x /etc/openvpn/openvpn-up.sh" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\chmod +x /etc/openvpn/openvpn-down.sh" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\chmod +x /root/update-ip-china-list.sh" package/lean/default-settings/files/zzz-default-settings
+
+#增加crontab任务
+sed -i "/exit 0/i\echo \'1 2 \* \* sun sh \/root\/update-ip-china-list\.sh\' >> \/etc\/crontab\/root" package/lean/default-settings/files/zzz-default-settings
