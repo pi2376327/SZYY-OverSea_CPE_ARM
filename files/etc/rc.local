@@ -9,4 +9,8 @@ ipset restore -f /etc/openvpn/chnroute-ipset
 #chmod +x /etc/openvpn/openvpn-up.sh
 #chmod +x /etc/openvpn/openvpn-down.sh
 
+#关闭bird开机启动
+/etc/init.d/bird stop
+#/etc/init.d/bird disable
+
 exit 0
