@@ -54,6 +54,11 @@ sed -i "/exit 0/i\uci set network\.4G_LTE\.dns=\'119.29.29.29\'" package/lean/de
 sed -i "/exit 0/i\uci set network\.4G_LTE\.metric=\'10\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci commit network" package/lean/default-settings/files/zzz-default-settings  
 
+#更改ssh、web默认端口
+sed -i "/exit 0/i\uci set dropbear\.\@dropbear\[0\]\.Port=\'24680\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci delete dropbear\.\@dropbear\[0\]\.Interface" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci commit dropbear" package/lean/default-settings/files/zzz-default-settings  
+
 #添加文件权限
 sed -i "/exit 0/i\chmod +x /etc/openvpn/openvpn-up.sh" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\chmod +x /etc/openvpn/openvpn-down.sh" package/lean/default-settings/files/zzz-default-settings
