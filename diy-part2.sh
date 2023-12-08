@@ -24,7 +24,7 @@ sed -i 's/OpenWrt/JYWX-CPE/g' package/base-files/files/bin/config_generate
 sed -i '1c\root:$1$KFkimD6C$KSpEWi1IcwqWYrESv2fQy/:19074:0:99999:7:::' package/base-files/files/etc/shadow
 
 #替换版本和名字，以及设备型号
-sed -i 's/R23.3.3/R23.3.22/g' package/lean/default-settings/files/zzz-default-settings
+sed -i 's/R23.3.3/R23.12.08/g' package/lean/default-settings/files/zzz-default-settings
 sed -i 's/OpenWrt/JYWX-CPE/g' package/lean/default-settings/files/zzz-default-settings
 #sed -i "/exit 0/i\sed -i \'s#Zbtlink ZBT-WG3526#JYWX-WIFI-4G#g\' \/proc\/cpuinfo" >>  package/lean/default-settings/files/zzz-default-settings
 
@@ -37,8 +37,22 @@ sed -i 's/set wireless.default_radio${devidx}.encryption=none/set wireless.defau
 sed -i '/psk2/a\                        set wireless.default_radio${devidx}.key=jywx.com' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
 #更改wan口默认dns
-sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option dns '\\\''172\.16\.0\.1'\\\''\' \/etc\/config\/network"   package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option peerdns '\\\''0'\\\''\' \/etc\/config\/network"   package/lean/default-settings/files/zzz-default-settings
+#sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option dns '\\\''172\.16\.0\.1'\\\''\' \/etc\/config\/network"   package/lean/default-settings/files/zzz-default-settings
+#sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option peerdns '\\\''0'\\\''\' \/etc\/config\/network"   package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network\.wan\.peerdns=\'0\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network\.wan\.dns=\'172\.16\.0\.1\'" package/lean/default-settings/files/zzz-default-settings
+
+#增加vpn0和4G_LTE接口
+sed -i "/exit 0/i\uci set network\.vpn0=interface" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network\.vpn0\.ifname=\'tun0\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network\.vpn0\.proto=\'none\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network\.4G_LTE=interface" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network\.4G_LTE\.proto=\'dhcp\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network\.4G_LTE\.ifname=\'wwan0\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network\.4G_LTE\.peerdns=\'0\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network\.4G_LTE\.dns=\'119.29.29.29\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network\.4G_LTE\.metric=\'10\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci commit network" package/lean/default-settings/files/zzz-default-settings  
 
 #添加文件权限
 sed -i "/exit 0/i\chmod +x /etc/openvpn/openvpn-up.sh" package/lean/default-settings/files/zzz-default-settings
