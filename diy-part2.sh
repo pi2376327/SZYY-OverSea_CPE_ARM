@@ -54,8 +54,8 @@ sed -i "/exit 0/i\uci set network\.4G_LTE\.dns=\'119.29.29.29\'" package/lean/de
 sed -i "/exit 0/i\uci set network\.4G_LTE\.metric=\'10\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci commit network" package/lean/default-settings/files/zzz-default-settings  
 
-#Firewall zon增加4G_LTE接口
-sed -i "/exit 0/i\uci set firewall.@zone[1].network=\'wan wan6 4G_LTE\'" package/lean/default-settings/files/zzz-default-settings
+#Firewall zon增加vpn0、4G_LTE接口
+sed -i "/exit 0/i\uci set firewall.@zone[1].network=\'wan wan6 4G_LTE vpn0\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci commit firewall" package/lean/default-settings/files/zzz-default-settings
 
 #更改ssh、web默认端口
