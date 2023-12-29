@@ -56,7 +56,6 @@ sed -i "/exit 0/i\uci commit network" package/lean/default-settings/files/zzz-de
 
 #Firewall zon wan增加vpn0、4G_LTE接口,允许wan区域接受ssh端口数据
 sed -i "/exit 0/i\uci set firewall.@zone[1].network=\'wan wan6 4G_LTE vpn0\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci commit firewall" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set firewall.@rule[10]=rule" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set firewall.@rule[10].enabled=\'1\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set firewall.@rule[10].target=\'ACCEPT\'" package/lean/default-settings/files/zzz-default-settings
@@ -65,6 +64,7 @@ sed -i "/exit 0/i\uci set firewall.@rule[10].dest_port=\'24680\'" package/lean/d
 sed -i "/exit 0/i\uci set firewall.@rule[10].name=\'allow-ssh\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set firewall.@rule[10].proto=\'tcp\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set firewall.@rule[10].src_ip=\'172.16.0.1\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci commit firewall" package/lean/default-settings/files/zzz-default-settings
 
 #更改ssh、web默认端口
 sed -i "/exit 0/i\uci set dropbear\.\@dropbear\[0\]\.Port=\'24680\'" package/lean/default-settings/files/zzz-default-settings
