@@ -1,5 +1,12 @@
 #!/bin/sh
 
+#add route-policy
+src=$(ip addr show tun0 | grep 'inet ' | sed 's/^.*inet //g' | sed 's/\/16.*$//g')
+gw=$(ip addr show tun0 | grep 'inet ' | cut -d' ' -f6 | cut -d'.' -f1-3).1
+ip route add default via $gw dev tun0 src $src table 100 
+ip rule add from all fwmark 1 table 100
+
+#check and add rules of mangle
 iptables -t mangle -C PREROUTING -m set ! --match-set chnroute dst -j MARK --set-mark 1
 if [ $? = 0 ]; then
         echo "------------the PREROUTING rules alread exist"
@@ -25,6 +32,3 @@ else
         fi
 fi
 
-src=$(ip addr show tun0 | grep 'inet ' | sed 's/^.*inet //g' | sed 's/\/16.*$//g')
-ip route add default via 172.16.0.1 dev tun0 src $src table 100 
-ip rule add from all fwmark 1 table 100
