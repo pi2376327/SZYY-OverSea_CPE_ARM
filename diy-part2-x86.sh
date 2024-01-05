@@ -85,8 +85,8 @@ sed -i "/exit 0/i\uci commit uhttpd" package/lean/default-settings/files/zzz-def
 sed -i "/exit 0/i\chmod +x /etc/openvpn/openvpn-up.sh" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\chmod +x /etc/openvpn/openvpn-down.sh" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\chmod +x /root/update-ip-china-list.sh" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\chmod +x /root/flowcontrol-watchdog.sh" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\chmod +x /root/openvpn-watchdog.sh" package/lean/default-settings/files/zzz-default-settings
 
 #增加crontab任务
 sed -i "/exit 0/i\echo \'1 2 \* \* sun sh \/root\/update-ip-china-list\.sh\' >> \/etc\/crontabs\/root" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\echo \'\*\/5 \* \* \* \* sh \/root\/flowcontrol-watchdog\.sh\' >> \/etc\/crontabs\/root" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\echo \'\*\/5 \* \* \* \* sh \/root\/openvpn-watchdog\.sh\' >> \/etc\/crontabs\/root" package/lean/default-settings/files/zzz-default-settings
