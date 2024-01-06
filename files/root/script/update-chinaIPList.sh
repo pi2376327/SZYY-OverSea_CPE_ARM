@@ -6,7 +6,7 @@ if [ ! -d /root/script ];then
         mkdir -p /root/script
 fi
 
-#Create tmp directory and download source file of domain
+#Create tmp directory and download source file of IPs
 mkdir -p /tmp/china-ip/
 wget -P /tmp/china-ip/ https://raw.githubusercontent.com/metowolf/iplist/master/data/special/china.txt
 
