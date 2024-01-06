@@ -4,7 +4,7 @@ DATE=`date +%Y-%m-%d-%H:%M:%S`
 
 #check and add rules of mangle     
 echo $DATE: Start to check iptables rules
-echo $DATE: Start to check iptables rules >>openvpn_watchdog.log
+echo $DATE: Start to check iptables rules > openvpn_watchdog.log
 iptables -t mangle -C PREROUTING -m set ! --match-set chnroute dst -j MARK --set-mark 1
 if [ $? = 0 ]; then
         echo "$DATE: The PREROUTING rules alread exist"
