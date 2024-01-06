@@ -11,27 +11,27 @@ ip rule add from all fwmark 1 table 100
 DATE=`date +%Y-%m-%d-%H:%M:%S`
 iptables -t mangle -C PREROUTING -m set ! --match-set chnroute dst -j MARK --set-mark 1
 if [ $? = 0 ]; then
-        echo "$DATE: The PREROUTING rules alread exist" 
+        echo "$DATE: The PREROUTING of mangle rules alread exist" 
         iptables -t mangle -C OUTPUT -m set ! --match-set chnroute dst -j MARK --set-mark 1
         if [ $? = 0 ]; then
-                echo "$DATE: The OUTPUT rules alread exist"
+                echo "$DATE: The OUTPUT of mangle rules alread exist"
                 exit 0
         else
                 iptables -t mangle -I OUTPUT -m set ! --match-set chnroute dst -j MARK --set-mark 1
-                echo "$DATE: Add OUTPUT  rules"
+                echo "$DATE: Add OUTPUT of mangle rules"
                 exit 0
         fi
 else
         iptables -t mangle -I PREROUTING -m set ! --match-set chnroute dst -j MARK --set-mark 1
-        echo "$DATE: Add PREROUTING rules"
+        echo "$DATE: Add PREROUTING of mangle rules"
 
         iptables -t mangle -C OUTPUT -m set ! --match-set chnroute dst -j MARK --set-mark 1
         if [ $? = 0 ]; then
-                echo "$DATE: The OUTPUT rules alread exist"
+                echo "$DATE: The OUTPUT rules of mangle alread exist"
                 exit 0
         else
                 iptables -t mangle -I OUTPUT -m set ! --match-set chnroute dst -j MARK --set-mark 1
-                echo "$DATE: Add OUTPUT  rules"
+                echo "$DATE: Add OUTPUT of mangle rules"
                 exit 0
         fi
 fi
