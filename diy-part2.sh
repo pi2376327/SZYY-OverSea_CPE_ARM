@@ -77,8 +77,8 @@ sed -i "/exit 0/i\uci commit uhttpd" package/lean/default-settings/files/zzz-def
 #添加文件权限
 sed -i "/exit 0/i\chmod +x /etc/openvpn/openvpn-up.sh" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\chmod +x /etc/openvpn/openvpn-down.sh" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\chmod +x /root/update-ip-china-list.sh" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\chmod +x /root/openvpn-watchdog.sh" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\chmod +x /root/script/update-chinaIPList.sh" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\chmod +x /root/script/openvpn-watchdog.sh" package/lean/default-settings/files/zzz-default-settings
 
 #增加crontab任务
 sed -i "/exit 0/i\echo \'1 2 \* \* sun sh \/root\/script\/update-chinaIPList\.sh\' >> \/etc\/crontabs\/root" package/lean/default-settings/files/zzz-default-settings
