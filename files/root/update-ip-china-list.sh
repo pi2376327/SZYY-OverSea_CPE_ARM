@@ -2,7 +2,7 @@
   
 DATE=`date +%Y-%m-%d-%H:%M:%S`
 
-#Create tmp directory and download source file of domain
+#Create tmp directory and download source file of IPs
 mkdir -p /tmp/china-ip/
 wget -P /tmp/china-ip/ https://raw.githubusercontent.com/metowolf/iplist/master/data/special/china.txt
 
