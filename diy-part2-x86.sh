@@ -37,7 +37,7 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Ma
 sed -i "/exit 0/i\uci set network\.wan\.peerdns=\'0\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network\.wan\.dns=\'172\.16\.0\.1\'" package/lean/default-settings/files/zzz-default-settings
 
-#增加vpn0和4G_LTE接口,更改wan\lan的默认物理接口
+#增加vpn0和4G_LTE接口,更改wan\lan的默认物理接口,删除wan6接口
 #Ovpn
 sed -i "/exit 0/i\uci set network\.vpn0=interface" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network\.vpn0\.ifname=\'tun0\'" package/lean/default-settings/files/zzz-default-settings
@@ -53,6 +53,8 @@ sed -i "/exit 0/i\uci set network\.4G_LTE\.metric=\'10\'" package/lean/default-s
 sed -i "/exit 0/i\uci set network.lan.ifname=\'eth1 eth2 eth3\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wan.ifname=\'eth0\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wan6.ifname=\'eth0\'" package/lean/default-settings/files/zzz-default-settings
+#del interface wan6
+sed -i "/exit 0/i\uci del network.wan6" package/lean/default-settings/files/zzz-default-settings
 #confirm configuration
 sed -i "/exit 0/i\uci commit network" package/lean/default-settings/files/zzz-default-settings  
 
