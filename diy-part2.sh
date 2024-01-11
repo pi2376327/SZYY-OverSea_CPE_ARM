@@ -57,7 +57,7 @@ sed -i "/exit 0/i\uci commit wireless" package/lean/default-settings/files/zzz-d
 sed -i "/exit 0/i\uci set network\.wan\.peerdns=\'0\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network\.wan\.dns=\'172\.16\.0\.1\'" package/lean/default-settings/files/zzz-default-settings
 
-#增加vpn0和4G_LTE接口
+#增加vpn0和4G_LTE接口/删除wan6接口
 sed -i "/exit 0/i\uci set network\.vpn0=interface" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network\.vpn0\.ifname=\'tun0\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network\.vpn0\.proto=\'none\'" package/lean/default-settings/files/zzz-default-settings
@@ -67,6 +67,7 @@ sed -i "/exit 0/i\uci set network\.4G_LTE\.ifname=\'wwan0\'" package/lean/defaul
 sed -i "/exit 0/i\uci set network\.4G_LTE\.peerdns=\'0\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network\.4G_LTE\.dns=\'119.29.29.29\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network\.4G_LTE\.metric=\'10\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci del network.wan6" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci commit network" package/lean/default-settings/files/zzz-default-settings  
 
 #Firewall zon wan增加vpn0、4G_LTE接口,允许wan区域接受ssh端口数据
