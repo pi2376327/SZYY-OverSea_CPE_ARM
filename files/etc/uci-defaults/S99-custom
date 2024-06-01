@@ -1,0 +1,71 @@
+#!/bin/sh
+
+#修改root密码
+passwd root << EOI
+szyywx.cn
+szyywx.cn
+EOI
+
+#修改名称,时区, 添加一个ntp服务地址
+uci -q batch << EOI
+set system.@system[0].hostname='YYWX-CPE'
+set system.@system[0].zonename='Asia/Shanghai'
+set system.@system[0].timezone='CST-8'
+commit system
+EOI
+
+#修改lan IP
+uci -q batch << EOI
+set network.lan.ipaddr='192.168.7.1'
+EOI
+
+#更改wifi名称
+uci -q batch <<EOI
+uci set wireless.default_radio0.ssid='YYWX-SDWAN'
+uci set wireless.default_radio0.encryption='psk2'
+uci set wireless.default_radio0.key='szyywx.cn'
+uci set wireless.radio1.htmode='VHT40'
+uci set wireless.default_radio1.ssid='YYWX-SDWAN'
+uci set wireless.default_radio1.encryption='psk2'
+uci set wireless.default_radio1.key='szyywx.cn'
+uci commit wireless
+EOI
+
+#增加vpn0接口
+uci -q batch <<EOI
+uci set network.vpn0=interface
+uci set network.vpn0.ifname='tun0'
+uci set network.vpn0.proto='none'
+uci del network.wan6
+uci commit network
+EOI
+
+#更改ssh\web默认端口
+uci -q batch <<EOI
+uci set dropbear.@dropbear[0].Port='24680'
+uci delete dropbear.@dropbear[0].Interface
+uci commit dropbear
+uci set uhttpd.main.listen_http='0.0.0.0:24681'
+uci set uhttpd.main.listen_https='0.0.0.0:24682'
+uci commit uhttpd
+EOI
+
+#给脚本文件添加权限
+uci -q batch <<EOI
+chmod +x /etc/openvpn/openvpn-up.sh
+chmod +x /etc/openvpn/openvpn-down.sh
+chmod +x /root/script/update-chinaIPList.sh
+chmod +x /root/script/openvpn-watchdog.sh
+EOI
+
+#增加crontab任务
+uci -q batch <<EOI
+echo '1 2 * * sun sh /root/script/update-chinaIPList.sh' >> /etc/crontabs/root
+echo '*/5 * * * * sh /root/script/openvpn-watchdog.sh' >> /etc/crontabs/root
+EOI
+
+#修改dnsmasq默认resolv-file文件
+uci -q batch <<EOI
+uci set dhcp.@dnsmasq[0].resolvfile='/etc/dnsmasq.resolv.conf'
+uci commit dhcp
+EOI
