@@ -51,18 +51,14 @@ uci commit uhttpd
 EOI
 
 #给脚本文件添加权限
-uci -q batch <<EOI
 chmod +x /etc/openvpn/openvpn-up.sh
 chmod +x /etc/openvpn/openvpn-down.sh
 chmod +x /root/script/update-chinaIPList.sh
 chmod +x /root/script/openvpn-watchdog.sh
-EOI
 
 #增加crontab任务
-uci -q batch <<EOI
 echo '1 2 * * sun sh /root/script/update-chinaIPList.sh' >> /etc/crontabs/root
 echo '*/5 * * * * sh /root/script/openvpn-watchdog.sh' >> /etc/crontabs/root
-EOI
 
 #修改dnsmasq默认resolv-file文件
 uci -q batch <<EOI
