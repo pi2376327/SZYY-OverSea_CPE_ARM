@@ -27,9 +27,15 @@ EOI
 
 #更改wifi名称
 uci -q batch <<EOI
+set wireless.radio0.legacy_rates='1'
+set wireless.radio0.country='US'
+set wireless.radio0.channel='11'
 set wireless.default_radio0.ssid='YYWX-SDWAN'
 set wireless.default_radio0.encryption='psk2'
 set wireless.default_radio0.key='szyywx.cn'
+
+set wireless.radio1.country='US'
+set wireless.radio1.channel='149'
 set wireless.radio1.htmode='VHT40'
 set wireless.default_radio1.ssid='YYWX-SDWAN'
 set wireless.default_radio1.encryption='psk2'
