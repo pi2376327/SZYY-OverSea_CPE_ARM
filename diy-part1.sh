@@ -21,9 +21,13 @@
 #make clean
 
 #删掉默认主题&&下载新主题
+#lean-lede
 #rm -rf package/lean/luci-theme-argon
 #git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
 #git clone https://github.com/jerrykuku/luci-app-argon-config.git  package/lean/luci-app-argon-config
+
+#openwrt
+git clone https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
 
 #编译frp软件
 #rm -rf package/lean/frp
