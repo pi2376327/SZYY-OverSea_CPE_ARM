@@ -11,6 +11,9 @@ uci -q batch << EOI
 set system.@system[0].hostname='YYWX-CPE'
 set system.@system[0].zonename='Asia/Shanghai'
 set system.@system[0].timezone='CST-8'
+set system.ntp.use_dhcp='0'
+set system.ntp.enabled='1'
+set system.ntp.server='ntp.aliyun.com'
 commit system
 EOI
 
