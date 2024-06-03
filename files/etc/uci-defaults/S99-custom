@@ -6,6 +6,13 @@ szyywx.cn
 szyywx.cn
 EOI
 
+#修改默认主题为argon
+#uci -q batch << EOI
+#set luci.themes.Argon=/luci-static/argon
+#set luci.main.mediaurlbase=/luci-static/argon
+#commit luci
+EOI
+
 #修改名称,时区, 添加一个ntp服务地址
 uci -q batch << EOI
 set system.@system[0].hostname='YYWX-CPE'
@@ -25,7 +32,7 @@ set dhcp.@dnsmasq[0].resolvfile='/etc/dnsmasq.resolv.conf'
 commit dhcp
 EOI
 
-#更改wifi名称
+#更改wifi默认设置
 uci -q batch <<EOI
 set wireless.radio0.legacy_rates='1'
 set wireless.radio0.country='US'
