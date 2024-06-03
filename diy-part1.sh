@@ -29,6 +29,7 @@
 #openwrt
 git clone https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
 
-#编译frp软件
-#rm -rf package/lean/frp
+#替换编译luci-app-xfrpc软件
+rm -rf package/luci-app-xfrpc
+git clone https://github.com/liudf0716/luci-app-xfrpc.git  package/luci-app-xfrpc
 #git clone https://github.com/kuoruan/openwrt-frp.git package/lean/frp
