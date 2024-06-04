@@ -33,3 +33,6 @@ git clone https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-a
 rm -rf package/luci-app-xfrpc
 git clone https://github.com/liudf0716/luci-app-xfrpc.git  package/luci-app-xfrpc
 #git clone https://github.com/kuoruan/openwrt-frp.git package/lean/frp
+
+#添加autoreboot插件
+git clone https://github.com/zxl78585/luci-app-autoreboot.git package/luci-app-autoreboot
