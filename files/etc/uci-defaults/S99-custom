@@ -82,5 +82,6 @@ touch ~/.vimrc
 #增加crontab任务
 echo '1 2 * * sun sh /root/script/update-chinaIPList.sh' >> /etc/crontabs/root
 echo '*/5 * * * * sh /root/script/openvpn-watchdog.sh' >> /etc/crontabs/root
+echo '0 5 * * sun reboot &' >> /etc/crontabs/root
 
 exit 0
