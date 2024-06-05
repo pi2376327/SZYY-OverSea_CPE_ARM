@@ -10,80 +10,104 @@
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
 
-# Modify default IP
-sed -i 's/192.168.1.1/192.168.150.1/g' package/base-files/files/bin/config_generate
-#修改默认主机名
-sed -i 's/OpenWrt/JYWX-CPE/g' package/base-files/files/bin/config_generate
-#修改欢迎banner
-#cat >package/base-files/files/etc/banner<<EOF
-#EOF
-#修改默认密码
-sed -i '1c\root:$1$KFkimD6C$KSpEWi1IcwqWYrESv2fQy/:19074:0:99999:7:::' package/base-files/files/etc/shadow
-#启用console密码
-sed -i "/exit 0/i\uci set system.@system[0].ttylogin='1'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci commit system" package/lean/default-settings/files/zzz-default-settings
+if [ ! -d /etc/uci-defaults ];then
+        mkdir -p /etc/uci-defaults
+fi
 
-#替换版本和名字，以及设备型号
-sed -i 's/R23.11.11/R24.1.14/g' package/lean/default-settings/files/zzz-default-settings
-sed -i 's/OpenWrt/JYWX-CPE/g' package/lean/default-settings/files/zzz-default-settings
-#sed -i "/exit 0/i\sed -i \'s#Zbtlink ZBT-WG3526#JYWX-WIFI-4G#g\' \/proc\/cpuinfo" >>  package/lean/default-settings/files/zzz-default-settings
+cat <<EOF > /etc/uci-defaults/99-custom
+#!/bin/sh
 
-#更改默认主题
-sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Makefile
+#修改root密码
+passwd root << EOI
+szyywx.cn
+szyywx.cn
+EOI
 
-#更改wan口默认dns
-#sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option dns '\\\''172\.16\.0\.1'\\\''\' \/etc\/config\/network"   package/lean/default-settings/files/zzz-default-settings
-#sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option peerdns '\\\''0'\\\''\' \/etc\/config\/network"   package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.wan\.peerdns=\'0\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.wan\.dns=\'172\.16\.0\.1\'" package/lean/default-settings/files/zzz-default-settings
+#修改默认主题为argon
+#uci -q batch << EOI
+#set luci.themes.Argon=/luci-static/argon
+#set luci.main.mediaurlbase=/luci-static/argon
+#commit luci
+#EOI
 
-#增加vpn0和4G_LTE接口,更改wan\lan的默认物理接口,删除wan6接口
-#Ovpn
-sed -i "/exit 0/i\uci set network\.vpn0=interface" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.vpn0\.ifname=\'tun0\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.vpn0\.proto=\'none\'" package/lean/default-settings/files/zzz-default-settings
-#4G_LTE
-sed -i "/exit 0/i\uci set network\.4G_LTE=interface" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.4G_LTE\.proto=\'dhcp\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.4G_LTE\.ifname=\'wwan0\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.4G_LTE\.peerdns=\'0\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.4G_LTE\.dns=\'119.29.29.29\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.4G_LTE\.metric=\'10\'" package/lean/default-settings/files/zzz-default-settings
-#wan\lan physic interface
-sed -i "/exit 0/i\uci set network.lan.ifname=\'eth1 eth2 eth3\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network.wan.ifname=\'eth0\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network.wan6.ifname=\'eth0\'" package/lean/default-settings/files/zzz-default-settings
-#del interface wan6
-sed -i "/exit 0/i\uci del network.wan6" package/lean/default-settings/files/zzz-default-settings
-#confirm configuration
-sed -i "/exit 0/i\uci commit network" package/lean/default-settings/files/zzz-default-settings  
+#修改名称,时区, 添加一个ntp服务地址,启用console登录密码
+uci -q batch << EOI
+set system.@system[0].hostname='YYWX-CPE'
+set system.@system[0].zonename='Asia/Shanghai'
+set system.@system[0].timezone='CST-8'
+set system.ntp.use_dhcp='0'
+set system.ntp.enabled='1'
+set system.ntp.server='ntp.aliyun.com'
+set system.@system[0].ttylogin='1'
+commit system
+EOI
 
-#Firewall zon wan增加vpn0、4G_LTE接口,允许wan区域接受ssh端口数据
-#sed -i "/exit 0/i\uci set firewall.@zone[1].network=\'wan wan6 4G_LTE vpn0\'" package/lean/default-settings/files/zzz-default-settings
-#sed -i "/exit 0/i\uci set firewall.@rule[10]=rule" package/lean/default-settings/files/zzz-default-settings
-#sed -i "/exit 0/i\uci set firewall.@rule[10].enabled=\'1\'" package/lean/default-settings/files/zzz-default-settings
-#sed -i "/exit 0/i\uci set firewall.@rule[10].target=\'ACCEPT\'" package/lean/default-settings/files/zzz-default-settings
-#sed -i "/exit 0/i\uci set firewall.@rule[10].src=\'wan\'" package/lean/default-settings/files/zzz-default-settings
-#sed -i "/exit 0/i\uci set firewall.@rule[10].dest_port=\'24680\'" package/lean/default-settings/files/zzz-default-settings
-#sed -i "/exit 0/i\uci set firewall.@rule[10].name=\'allow-ssh\'" package/lean/default-settings/files/zzz-default-settings
-#sed -i "/exit 0/i\uci set firewall.@rule[10].proto=\'tcp\'" package/lean/default-settings/files/zzz-default-settings
-#sed -i "/exit 0/i\uci set firewall.@rule[10].src_ip=\'172.16.0.1\'" package/lean/default-settings/files/zzz-default-settings
-#sed -i "/exit 0/i\uci commit firewall" package/lean/default-settings/files/zzz-default-settings
+#修改lan IP和DNSMASQ配置
+uci -q batch << EOI
+set network.lan.ipaddr='192.168.150.1'
+commit network
+set dhcp.@dnsmasq[0].cachesize='10000'
+set dhcp.@dnsmasq[0].resolvfile='/etc/dnsmasq.resolv.conf'
+set dhcp.@dnsmasq[0].filter_aaaa='1'
+set dhcp.@dnsmasq[0].interface='lan'
+commit dhcp
+EOI
 
-#更改ssh、web默认端口
-sed -i "/exit 0/i\uci set dropbear\.\@dropbear\[0\]\.Port=\'24680\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci delete dropbear\.\@dropbear\[0\]\.Interface" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci commit dropbear" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set uhttpd.main.listen_http=\'0.0.0.0:24681\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set uhttpd.main.listen_https=\'0.0.0.0:24682\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci commit uhttpd" package/lean/default-settings/files/zzz-default-settings 
+#更改wifi默认设置
+#uci -q batch <<EOI
+#set wireless.radio0.legacy_rates='1'
+#set wireless.radio0.country='US'
+#set wireless.radio0.channel='11'
+#set wireless.default_radio0.ssid='YYWX-SDWAN'
+#set wireless.default_radio0.encryption='psk2'
+#set wireless.default_radio0.key='szyywx.cn'
 
-#添加文件权限
-sed -i "/exit 0/i\chmod +x /etc/openvpn/openvpn-up.sh" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\chmod +x /etc/openvpn/openvpn-down.sh" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\chmod +x /root/script/update-chinaIPList.sh" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\chmod +x /root/script/openvpn-watchdog.sh" package/lean/default-settings/files/zzz-default-settings
+#set wireless.radio1.country='US'
+#set wireless.radio1.channel='149'
+#set wireless.radio1.htmode='VHT40'
+#set wireless.default_radio1.ssid='YYWX-SDWAN'
+#set wireless.default_radio1.encryption='psk2'
+#set wireless.default_radio1.key='szyywx.cn'
+#commit wireless
+#EOI
+
+#sed -i '/option disabled/d' /etc/config/wireless
+#sed -i '/set wireless.${name}.disabled/d' /lib/wifi/mac80211.sh
+
+#增加vpn0接口
+uci -q batch <<EOI
+set network.vpn0=interface
+set network.vpn0.ifname='tun0'
+set network.vpn0.proto='none'
+del network.wan6
+commit network
+EOI
+
+#更改ssh\web默认端口
+uci -q batch <<EOI
+set dropbear.@dropbear[0].Port='24680'
+delete dropbear.@dropbear[0].Interface
+commit dropbear
+set uhttpd.main.listen_http='0.0.0.0:24681'
+set uhttpd.main.listen_https='0.0.0.0:24682'
+commit uhttpd
+EOI
+
+#给脚本文件添加权限
+chmod +x /etc/openvpn/openvpn-up.sh
+chmod +x /etc/openvpn/openvpn-down.sh
+chmod +x /root/script/update-chinaIPList.sh
+chmod +x /root/script/openvpn-watchdog.sh
+#touch ~/.vimrc
+ln -s /usr/share/vim/vimrc /usr/share/vim/defaults.vim  #修复vim bug
+rm -rf /etc/resolv.conf  #删除默认wan口dns地址
+echo 'nameserver 127.0.0.1' > /etc/resolv.conf #增加dns指向本机dnsmasq
+
 
 #增加crontab任务
-sed -i "/exit 0/i\echo \'1 2 \* \* sun sh \/root\/script\/update-chinaIPList\.sh\' >> \/etc\/crontabs\/root" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\echo \'\*\/5 \* \* \* \* sh \/root\/script\/openvpn-watchdog\.sh\' >> \/etc\/crontabs\/root" package/lean/default-settings/files/zzz-default-settings
+echo '1 2 * * sun sh /root/script/update-chinaIPList.sh' >> /etc/crontabs/root
+echo '*/5 * * * * sh /root/script/openvpn-watchdog.sh' >> /etc/crontabs/root
+echo '0 5 * * sun reboot &' >> /etc/crontabs/root   #每周日凌晨5点重启
+
+exit 0
+EOF
