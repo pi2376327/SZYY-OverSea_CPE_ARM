@@ -82,8 +82,8 @@ chmod +x /root/script/update-chinaIPList.sh
 chmod +x /root/script/openvpn-watchdog.sh
 #touch ~/.vimrc
 ln -s /usr/share/vim/vimrc /usr/share/vim/defaults.vim  #修复vim bug
-rm -rf /etc/resolv.conf
-echo 'nameserver 127.0.0.1' > /etc/resolv.conf #
+rm -rf /etc/resolv.conf  #删除默认wan口dns地址
+echo 'nameserver 127.0.0.1' > /etc/resolv.conf #增加dns指向本机dnsmasq
 
 
 #增加crontab任务
