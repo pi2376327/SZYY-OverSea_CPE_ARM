@@ -103,6 +103,11 @@ ln -s /usr/share/vim/vimrc /usr/share/vim/defaults.vim  #修复vim bug
 rm -rf /etc/resolv.conf  #删除默认wan口dns地址
 echo 'nameserver 127.0.0.1' > /etc/resolv.conf #增加dns指向本机dnsmasq
 
+#修改版本名称
+sed -i '/DISTRIB_REVISION/d' /etc/openwrt_release
+echo "DISTRIB_REVISION='R24.6.6'" >> /etc/openwrt_release
+sed -i '/DISTRIB_DESCRIPTION/d' /etc/openwrt_release
+echo "DISTRIB_DESCRIPTION='YYWX-SDWAN-CPE '" >> /etc/openwrt_release
 
 #增加crontab任务
 echo '1 2 * * sun sh /root/script/update-chinaIPList.sh' >> /etc/crontabs/root
