@@ -24,11 +24,14 @@ set system.ntp.server='ntp.aliyun.com'
 commit system
 EOI
 
-#修改lan IP和DNSMASQ解析文件
+#修改lan IP和DNSMASQ配置
 uci -q batch << EOI
 set network.lan.ipaddr='192.168.150.1'
 commit network
+set dhcp.@dnsmasq[0].cachesize='10000'
 set dhcp.@dnsmasq[0].resolvfile='/etc/dnsmasq.resolv.conf'
+set dhcp.@dnsmasq[0].filter_aaaa='1'
+set dhcp.@dnsmasq[0].interface='lan'
 commit dhcp
 EOI
 
@@ -78,7 +81,10 @@ chmod +x /etc/openvpn/openvpn-down.sh
 chmod +x /root/script/update-chinaIPList.sh
 chmod +x /root/script/openvpn-watchdog.sh
 #touch ~/.vimrc
-ln -s /usr/share/vim/vimrc /usr/share/vim/defaults.vim
+ln -s /usr/share/vim/vimrc /usr/share/vim/defaults.vim  #修复vim bug
+rm -rf /etc/resolv.conf
+echo 'nameserver 127.0.0.1' > /etc/resolv.conf #
+
 
 #增加crontab任务
 echo '1 2 * * sun sh /root/script/update-chinaIPList.sh' >> /etc/crontabs/root
