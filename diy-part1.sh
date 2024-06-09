@@ -29,7 +29,7 @@ git clone https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-a
 #替换编译luci-app-xfrpc软件
 #rm -rf /package/feeds/packages/xfrpc
 #git clone https://github.com/liudf0716/xfrpc.git package/xfrpc
-rm -rf package/feeds/luci/luci-app-xfrpc
+#rm -rf package/feeds/luci/luci-app-xfrpc
 rm -rf feeds/luci/applications/luci-app-xfrpc
 git clone https://github.com/liudf0716/luci-app-xfrpc.git  feeds/luci/applications/luci-app-xfrpc
 
