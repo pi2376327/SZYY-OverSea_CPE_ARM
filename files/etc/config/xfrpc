@@ -1,0 +1,16 @@
+config xfrpc 'common'
+        option enabled 1
+        option loglevel 7
+        option server_addr 183.56.160.246
+        option server_port 7200
+        option token szyywx.cn
+
+config tcp 'ssh'
+        option local_ip 127.0.0.1
+        option local_port 24680
+        option remote_port 20000
+
+config tcp 'web'
+        option local_ip 127.0.0.1
+        option local_port 24681
+        option remote_port 10000
