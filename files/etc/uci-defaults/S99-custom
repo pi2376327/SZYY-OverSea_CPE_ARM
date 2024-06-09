@@ -30,7 +30,7 @@ uci -q batch << EOI
 set network.lan.ipaddr='192.168.150.1'
 commit network
 set dhcp.@dnsmasq[0].cachesize='10000'
-set dhcp.@dnsmasq[0].resolvfile='/etc/dnsmasq.resolv.conf'
+set dhcp.@dnsmasq[0].resolvfile='/etc/resolv.dnsmasq.conf'
 set dhcp.@dnsmasq[0].filter_aaaa='1'
 set dhcp.@dnsmasq[0].interface='lan'
 commit dhcp
