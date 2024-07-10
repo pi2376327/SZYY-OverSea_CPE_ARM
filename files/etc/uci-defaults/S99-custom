@@ -92,7 +92,7 @@ echo 'nameserver 127.0.0.1' > /etc/resolv.conf #增加dns指向本机dnsmasq
 
 #修改版本名称
 sed -i '/DISTRIB_REVISION/d' /etc/openwrt_release
-echo "DISTRIB_REVISION='R24.6.6'" >> /etc/openwrt_release
+echo "DISTRIB_REVISION='R24.7.10'" >> /etc/openwrt_release
 sed -i '/DISTRIB_DESCRIPTION/d' /etc/openwrt_release
 echo "DISTRIB_DESCRIPTION='YYWX-SDWAN-CPE '" >> /etc/openwrt_release
 
