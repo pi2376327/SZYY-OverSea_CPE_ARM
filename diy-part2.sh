@@ -23,7 +23,8 @@ git clone https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-a
 #rm -rf package/feeds/packages/xfrpc
 #git clone https://github.com/liudf0716/xfrpc.git package/feeds/packages/xfrpc
 rm -rf feeds/luci/applications/luci-app-xfrpc
-git clone https://github.com/liudf0716/luci-app-xfrpc.git  feeds/luci/applications/luci-app-xfrpc
+#git clone https://github.com/liudf0716/luci-app-xfrpc.git  feeds/luci/applications/luci-app-xfrpc
+git clone https://github.com/pi2376327/luci-app-xfrpc.git  feeds/luci/applications/luci-app-xfrpc
 
 #下载原版frp
 #git clone https://github.com/kuoruan/openwrt-frp.git package/lean/frp
