@@ -32,5 +32,5 @@ git clone https://github.com/liudf0716/luci-app-xfrpc.git  feeds/luci/applicatio
 #git clone https://github.com/f8q8/luci-app-autoreboot.git package/luci-app-autoreboot
 
 #添加redsocks2插件
-git clone https://github.com/will-cxydiary/redsocks2-openwrt.git package/redsocks2
-
+#git clone https://github.com/will-cxydiary/redsocks2-openwrt.git package/redsocks2
+git clone https://github.com/pi2376327/openwrt-redsocks2.git package/redsocks2
