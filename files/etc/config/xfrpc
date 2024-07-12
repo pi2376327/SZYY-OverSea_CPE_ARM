@@ -1,5 +1,5 @@
 config xfrpc 'common'
-        option enabled 0
+        option enabled 1
         option loglevel 7
         option server_addr 183.56.160.246
         option server_port 7200
