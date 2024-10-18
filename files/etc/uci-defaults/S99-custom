@@ -7,11 +7,11 @@ szyywx.cn
 EOI
 
 #修改默认主题为argon
-#uci -q batch << EOI
-#set luci.themes.Argon=/luci-static/argon
-#set luci.main.mediaurlbase=/luci-static/argon
-#commit luci
-#EOI
+uci -q batch << EOI
+set luci.themes.Argon=/luci-static/argon
+set luci.main.mediaurlbase=/luci-static/argon
+commit luci
+EOI
 
 #修改名称,时区, 添加一个ntp服务地址,启用console登录密码
 uci -q batch << EOI
