@@ -5,12 +5,12 @@ config xfrpc 'common'
         option server_port 7200
         option token szyywx.cn
 
-config tcp 'client0_ssh'
+config tcp 'default_ssh'
         option local_ip 127.0.0.1
         option local_port 24680
         option remote_port 20000
 
-config tcp 'client0_web'
+config tcp 'default_web'
         option local_ip 127.0.0.1
         option local_port 24681
         option remote_port 10000
