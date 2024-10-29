@@ -66,8 +66,8 @@ set network.vpn0.ifname='tun0'
 set network.vpn0.proto='none'
 del network.wan6
 
-#set network.lan.ifname='eth1 eth2 eth3'
-#set network.wan.ifname='eth0'
+set network.lan.ifname='eth1 eth2 eth3'
+set network.wan.ifname='eth0'
 commit network
 EOI
 
@@ -93,7 +93,7 @@ echo 'nameserver 127.0.0.1' > /etc/resolv.conf #增加dns指向本机dnsmasq
 
 #修改版本名称
 sed -i '/DISTRIB_REVISION/d' /etc/openwrt_release
-echo "DISTRIB_REVISION='R24.7.10'" >> /etc/openwrt_release
+echo "DISTRIB_REVISION='R24.10.30'" >> /etc/openwrt_release
 sed -i '/DISTRIB_DESCRIPTION/d' /etc/openwrt_release
 echo "DISTRIB_DESCRIPTION='YYWX-SDWAN-CPE '" >> /etc/openwrt_release
 
