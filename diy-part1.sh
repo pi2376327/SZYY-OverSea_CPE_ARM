@@ -19,3 +19,6 @@
 
 #rm -rf feeds/luci/applications/luci-app-xfrpc
 #git clone https://github.com/liudf0716/luci-app-xfrpc.git  feeds/luci/applications/luci-app-xfrpc
+
+#ssr-plus
+git clone https://github.com/fw876/helloworld.git package/helloworld
